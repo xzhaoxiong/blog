@@ -1,0 +1,220 @@
+@charset "UTF-8";
+@import "mixins";
+@import "reset-element";
+@font-face {
+  font-family: 'iconfont';  /* project id 667376 */
+  src: url('//at.alicdn.com/t/font_667376_37ly9xvonwz.eot');
+  src: url('//at.alicdn.com/t/font_667376_37ly9xvonwz.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_667376_37ly9xvonwz.woff') format('woff'),
+  url('//at.alicdn.com/t/font_667376_37ly9xvonwz.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_667376_37ly9xvonwz.svg#iconfont') format('svg');
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 888878 */
+  src: url('//at.alicdn.com/t/font_888878_fdiz8swmyo.eot');
+  src: url('//at.alicdn.com/t/font_888878_fdiz8swmyo.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_888878_fdiz8swmyo.woff') format('woff'),
+  url('//at.alicdn.com/t/font_888878_fdiz8swmyo.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_888878_fdiz8swmyo.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+  margin:0;padding:0;
+  &:hover,&:focus{ -moz-outline-style: none; outline: none;}
+  &:active {star:expression(this.onFocus=this.blur());}
+}
+article,aside,dialog,footer,header,section,footer,nav,figure,menu{display:block}
+body{font-family: "Microsoft YaHei","PingFang SC","Hiragino Sans GB","微软雅黑",Arial,sans-serif;color:$font_color;letter-spacing:0px;overflow-x: hidden;word-break: break-all;-moz-osx-font-smoothing:grayscale;background:RGBA(245, 246, 248, 1);-webkit-font-smoothing: inherit !important;min-width:1024px; overflow-y: visible;
+  fieldset,img,input,textarea,select,button{ border:0}
+  audio,canvas,video { *zoom: 1;}
+  table{border-collapse:collapse;border-spacing:0;}
+  input,textarea,select,button{list-style:none;outline:none;font-family: "Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,"Hiragino Sans GB","微软雅黑",Arial,sans-serif;}
+  em,i,address,cite,dfn,var{ font-style:normal; font-weight:normal}
+  caption,th{text-align:left}
+  ul,ol,li{list-style: none}
+  h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+  q:before,q:after{content:''}
+  abbr,acronym{border:0;font-variant:normal}
+  sup{vertical-align:text-top}
+  sub{vertical-align:text-bottom}
+  a{outline-style:none;text-decoration:none;color: $font_color;}
+  a:hover{text-decoration: none;}
+  // 自定义常用样式
+  .clearfix{*zoom:1}
+  .clearfix:after{content: '';display: table;clear: both;}
+  .clear{ clear: both;}
+  .rel{ position: relative;}
+  .center{ text-align: center; }
+  .fr{ float: right; }
+  .fl{ float: left; }
+  .tr{ text-align: right }
+  .color{ color: $color }
+  .base_font{@include inline-block}
+  .base_font_m{transform: scale(0.8);color: $font_color_min; @include inline-block}
+  .hover:hover{cursor: pointer; @include opacity(0.8)}
+  .no_border{border: none !important}
+  .embar{opacity: 0.3 !important;}
+
+  .mt10 { margin-top: 10px}
+  .mt20 { margin-top: 20px}
+  .mt50 { margin-top: 50px}
+
+  .button-common { padding: 7px 16px; color: #3670D9; border: 1px solid #3670D9 !important;}
+  .button-common-big { padding: 8px 16px; color: #3670D9; border: 1px solid #3670D9 !important;}
+  .button-primary { padding: 9px 29px; color: #fff; background-color: #3A72D7;}
+  .button-cancel, .button-cancel:hover { padding: 9px 29px; color: #909399; background-color: white; border: 1px solid #C0C4CC;}
+  /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+  select::-ms-expand { display: none; }
+
+  /*修改输入框placeholder文字默认颜色*/
+  input::-webkit-input-placeholder,
+  input::-moz-placeholder,
+  input::-ms-input-placeholder {
+    color:#aaa;
+  }
+
+  /*audio去掉下载按钮*/
+  audio::-webkit-media-controls-enclosure { overflow:hidden; }
+  audio::-webkit-media-controls-panel { width: calc(100% + 30px); }
+
+  // 去除webkit下 input选择框淡黄底色
+  input:-webkit-autofill { -webkit-box-shadow: 0px 0px 0px 1000px white inset; }
+
+  /*去除Firefox下按钮虚线框终极方案*/
+  button::-moz-focus-inner,
+  input[type="reset"]::-moz-focus-inner,
+  input[type="button"]::-moz-focus-inner,
+  input[type="submit"]::-moz-focus-inner,
+  input[type="file"] > input[type="button"]::-moz-focus-inner { border: none }
+}
+
+// 穿梭框错误
+.is-error .el-transfer .el-transfer-panel:nth-child(3){ border-color: #f56c6c !important}
+
+// 表格不显示字
+.nok_form {
+  .el-form-item {margin-bottom: 0 !important;}
+  .el-input__inner {
+    padding: 0 10px !important;
+  }
+}
+
+.nok_form_b10 {
+  .el-form-item {margin-bottom: 10px !important;}
+  .el-input__inner {
+    padding: 0 10px !important;
+  }
+  .el-form-item__error {display: none !important}
+}
+
+// 不带正确标识图标的form
+.no_has_check_form {
+  .el-icon-circle-check{ display: none !important}
+}
+
+.dialog_footer_nob {
+  .el-dialog {
+    .el-dialog__body{ padding-bottom: 0 !important}
+  }
+}
+
+.no_header_check_table {
+  .el-table__header-wrapper {
+    .el-checkbox{display: none !important}
+  }
+}
+
+// list table
+.list-table-summary{
+  .el-table__header {
+    .cell{color: #303133 !important;}
+  }
+}
+
+// detail table
+.detail-table-summary{
+  .el-table__header {
+    th{background: #F6F6F6 !important; border-bottom: none !important;
+      .cell{color: $font_color_min; position: relative;
+        &:before{content: ''; display: block; width: 1px; height: 16px; background: #DCDCDC; position: absolute; right: 0;top: 50%; margin-top: -8px;}
+      }
+      &:nth-last-child(2) .cell:before{content: none}
+      &:last-child .cell:before{content: none}
+      &.gutter + th{
+        &:before{content: none}
+      }
+    }
+  }
+}
+
+// 设计图对话框样式
+.dialog-common {
+  @include radiusCorners(20px);
+  .el-form-item {margin-bottom: 17px;}
+  .el-input, .vue-treeselect{ width: 200px; }
+  .el-textarea { width: 537px; }
+  .el-dialog__header { background: #F7F9FE; @include rounded('top', 'left', 20px); @include rounded('top', 'right', 20px);}
+  .el-dialog__body { padding-bottom: 1px;}
+  .dialog-footer {
+    width: 516px; margin: 0 auto; border-top: 1px solid #eee; padding-top: 19px;
+    .el-button {
+      width: 90px; height: 32px; line-height: 6px;
+      //&:nth-child(1) {
+      //  background: linear-gradient(90deg, rgba(221, 222, 224, 1), rgba(192, 196, 204, 1))
+      //}
+      &:nth-child(2) {
+        background: linear-gradient(90deg, rgba(74, 130, 232, 1), rgba(42, 109, 229, 1))
+      }
+    }
+  }
+  i.iconfont { cursor: pointer; margin-left: 8px;}
+}
+
+// 重置控件样式
+.disabled-search-button {
+  &.el-button.is-disabled, &.el-button.is-disabled:hover { background: #C0C4CC; color: #eee; border: 0;}
+}
+
+
+.pre-step-button { background-color: #D8DEEE !important; border: 0 !important; color: #303133 !important; }
+
+*::-webkit-scrollbar {width:6px; height:10px; background-color:transparent;} /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+*::-webkit-scrollbar-track {background-color:white;  } /*定义滚动条轨道 内阴影+圆角*/
+*::-webkit-scrollbar-thumb {background-color:#DDDEE0; border-radius:6px;}
+
+.divide {
+  margin-bottom: 22px;
+  &:before {
+    display: inline-block; content: ''; width: 6px; height: 20px; background: #154CAB; vertical-align: bottom; margin-right: 10px;
+  }
+  &:after {
+    display: inline-block; content: ''; width: calc(100% - 118px); height: 1px; background: #eee; vertical-align: middle; margin-left: 30px;
+  }
+}
+.zl-holder-info {
+  width: 1025px; margin: 0 auto; @include clearfix;
+  .holder-info-item {
+    width: 440px; display: inline-block;
+    &:nth-child(1) { float: left;}
+    &:nth-child(2) { float: right;}
+  }
+  .arrow-right {
+    position: relative; margin-top: 108px; margin-left: 40px; width: 72px; height: 42px; font-size: 16px; color: #F37965; font-weight: bold;
+    float: left; display: inline-block;
+    &:before { position: absolute; left: -14px; top: 14px;width: 72px; height: 21px; display: inline-block; content: '';
+      background: url("/static/img/arrow-right.png") no-repeat;
+    }
+  }
+  .el-progress { margin-top: 13px; }
+  /deep/ .el-progress-bar { width: 187px;}
+  /deep/ .el-progress-bar__outer { width: 137px;}
+}
+.zl-share-info {
+  width: 1025px; margin: 0 auto;
+}

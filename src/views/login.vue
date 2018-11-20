@@ -6,12 +6,22 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "home",
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      dates: null,
+    }
+  },
+  methods: {
+    GetList() {
+        this.dates = null
+        this.portApi.repository.GetUser().then(res => {
+          this.dates = res;
+        })
+      },
+  },
+
 };
 </script>

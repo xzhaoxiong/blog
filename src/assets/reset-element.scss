@@ -1,0 +1,113 @@
+.zl-table.el-table {
+  border-top: 1px solid #eee;
+  &.header-color {
+    .el-table__header tr th{
+      background-color: #eee;
+      .cell {
+        color: #303133;
+
+      }
+    }
+  }
+  .el-table__header {
+    tr > th {
+      .cell {
+        color:rgba(144,147,153,1);
+
+      }
+    }
+    tr > th:nth-child(n+2) {
+      .cell {
+        &:before {
+          position: absolute;
+          left: 0;
+          top: 5px;
+          content: '';
+          height: 16px;
+          width: 1px;
+          background: rgba(220,220,220,1);;
+        }
+      }
+    }
+  }
+}
+
+.zl-tabs.el-tabs {
+  .el-tabs__nav-scroll {
+    .el-tabs__active-bar {
+      height: 3px;
+
+    }
+    .el-tabs__item.is-active {
+      font-weight: bold;
+    }
+  }
+}
+
+.append-class {
+  /deep/ .el-input-group__append {
+    border: 0;
+    padding: 0 10px;
+    background: rgba(255,255,255, 0);
+    height: 42px;
+  }
+  /deep/ .el-input__inner {
+    border-radius: 6px;
+  }
+}
+
+.el-button.is-disabled.zl-disabled,.el-button.is-disabled:hover {
+  &.zl-disabled {
+    background:rgba(192,196,204,1) ;
+    border-color: rgba(192,196,204,1) ;
+  }
+}
+.font-bold {
+  font-weight:bold;
+  color:rgba(48,49,51,1);
+  /deep/ .el-input__inner {
+    font-weight:bold !important;
+    color:rgba(48,49,51,1) !important;
+  }
+  /deep/ .el-textarea__inner {
+    font-weight:bold;
+    color:rgba(48,49,51,1) !important;;
+  }
+}
+
+.form-disabled.el-form {
+  .el-input__inner, .el-textarea__inner {
+    color: #303133;
+    font-weight: bold;
+  }
+  .el-input__suffix {
+    color: #303133;
+  }
+}
+.item-disabled.el-form-item {
+  .el-input__inner, .el-textarea__inner {
+    color: #303133;
+    font-weight: bold;
+  }
+  .el-input__suffix {
+    color: #303133;
+  }
+  .el-radio {
+    .el-radio__label { color: #303133;}
+  }
+}
+
+.zl-tooltip.el-tooltip__popper.is-light{
+  border: 0;
+  box-shadow:0px 1px 20px 0px rgba(48,49,51,0.1);
+  .popper__arrow {
+    border-left-color: #eee;
+    border-right-color: #eee;
+    &:after {
+      //border-color: #eee;
+      border-top-color: #eee;
+      border-bottom-color: #eee;
+    }
+  }
+}
+

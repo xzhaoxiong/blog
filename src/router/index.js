@@ -15,7 +15,8 @@ const router = new VueRouter({
 // const IS_LOGIN=true   //根据存储在cookie的登录信息判断是否登录的判断
 
 router.beforeEach((to,form,next)=>{  //router实例的beforeEach方法是注册一个全局前置守卫，从from路由对象到to路由对象，即禁止在没有登录情况下，在网址栏输入admin会跳转到admin页面。
-		next()
+        next()
+        console.log('beforeEach',to,form,next)
 })
 
 // router.beforeResolve((to,form,next)=>{  //router实例的beforeResolve方法是注册一个全局守卫，从from路由对象到to路由对象，即页面跳转前所有钩子执行完最后执行该函数 ，
