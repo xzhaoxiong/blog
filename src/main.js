@@ -11,6 +11,7 @@ import api from '@/utils/api'
 // Vue.prototype.$ajax = axios;
 
 Vue.config.productionTip = false;
+
 Vue.use(ElementUI);
 
 // 图片懒加载
@@ -25,3 +26,7 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
+
+
+// api
+Vue.prototype.portApi = api

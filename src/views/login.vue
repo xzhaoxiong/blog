@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
+    {{dates}}
   </div>
 </template>
 
@@ -17,11 +18,13 @@ export default {
   methods: {
     GetList() {
         this.dates = null
-        this.portApi.repository.GetUser().then(res => {
+        this.portApi.tool.GetUser().then(res => {
           this.dates = res;
         })
       },
   },
-
+ created() {
+    this.GetList();
+  },
 };
 </script>

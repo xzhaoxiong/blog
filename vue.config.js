@@ -1,3 +1,6 @@
+
+const path = require('path')
+
 module.exports = {
     // 基本路径
     baseUrl: './',
@@ -8,7 +11,26 @@ module.exports = {
     // webpack配置
     // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
     chainWebpack: () => { },
-    configureWebpack: () => { },
+    configureWebpack: config => { // webpack配置，值位对象时会合并配置，为方法时会改写配置
+        // if (process.env.NODE_ENV === 'production') {
+        //     // 为生产环境修改配置...
+        //     config.mode = 'production';
+        // } else {
+        //     // 为开发环境修改配置...
+        //     config.mode = 'development';
+        // }
+        Object.assign(config, { // 开发生产共同配置
+            resolve: {
+            extensions: ['.js', '.vue', '.json'],
+            alias: {
+                '@': path.resolve(__dirname, './src'),
+                '@com': path.resolve(__dirname, './src/components'),
+                '@views': path.resolve(__dirname, 'src/views'),
+                'vue$': 'vue/dist/vue.esm.js'
+            }
+            }
+        })
+    },
     // 生产环境是否生成 sourceMap 文件
     productionSourceMap: false,
     // css相关配置

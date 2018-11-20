@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-import qs from 'qs'
+// import qs from 'qs'
 import router from '@/router'
 
 import * as tool from './api/tool' // 方案模块
@@ -48,91 +48,91 @@ axios.defaults.baseURL = (process.env.NODE_ENV === 'production') ? (window.local
 
 
 // 传参序列化
-axios.interceptors.request.use((config) => {
-    removePending(config); //在一个ajax发送前执行一下取消操作
-    config.cancelToken = new cancelToken((c) => {
-      // 这里的ajax标识我是用请求地址&请求方式拼接的字符串
-      pending.push({
-        u: config.url + '&' + config.method,
-        f: c
-      });
-    })
+// axios.interceptors.request.use((config) => {
+//     removePending(config); //在一个ajax发送前执行一下取消操作
+//     config.cancelToken = new cancelToken((c) => {
+//       // 这里的ajax标识我是用请求地址&请求方式拼接的字符串
+//       pending.push({
+//         u: config.url + '&' + config.method,
+//         f: c
+//       });
+//     })
   
-    // 判断是否存在token，如果存在的话，则每个http header都加上token
-    if (Vue.cookie.get('TOKEN')) {
-      config.headers.Authorization = 'Bearer ' + Vue.cookie.get('TOKEN')
-    }
-let _ax = config.url.split('/')[1]
-let Creator = 'F1750EA0-EBC3-4F25-9A92-F48C34C05FCB'
-// 发请求前组装data
-if (config.headers['Content-Type'] === 'multipart/form-data;') {
-  config.data.Creator = Creator
-  return config
-}
-if (config.method === 'post' && _ax !== 'jsonapi') {
-  let data = qs.parse(config.data)
-  config.data = qs.stringify({
-    Creator,
-    ...data
-  })
-} else if (config.method === 'get') {
-  config.params = {
-    Creator,
-    ...config.params
-  }
-} else if (_ax === 'jsonapi') {
-  config.headers['Content-Type'] = 'application/json;charset=UTF-8'
-  if (typeof config.data === 'undefined') config.data = {}
-  Object.assign(config.data, {
-    Creator
-  })
-}
-if (Vue.cookie.get('TOKEN')) {
-  if (window.localStorage.getItem(`${location.host}refreshToken_in`) <= Math.round(new Date().getTime() / 1000)) {
-    if (!window.isRefreshing) {
-      window.isRefreshing = true
-      register.Refresh({
-        Token: Vue.cookie.get('TOKEN'),
-        RefreshToken: window.localStorage.getItem(`${location.host}refreshToken`)
-      }).then(res => {
-        if (res.ResultType === 200) {
-          window.isRefreshing = false
-          console.log('res', res)
-          let
-            expiresTime = (res.AppendData.expires_in - 60) / 60, // 比服务器少一分钟
-            token = res.AppendData.access_token
-          Vue.cookie.set('TOKEN', token, {
-            expires: `${expiresTime}m`
-          });
-          window.localStorage.setItem(`${location.host}refreshToken`, res.AppendData.refreshToken)
-          window.localStorage.setItem(`${location.host}refreshToken_in`, res.AppendData.refreshToken_in)
-        }
-      }).catch(error => {
-          window.isRefreshing = false
-        }
+//     // 判断是否存在token，如果存在的话，则每个http header都加上token
+//     // if (Vue.cookie.get('TOKEN')) {
+//     //   config.headers.Authorization = 'Bearer ' + Vue.cookie.get('TOKEN')
+//     // }
+// let _ax = config.url.split('/')[1]
+// let Creator = 'F1750EA0-EBC3-4F25-9A92-F48C34C05FCB'
+// // 发请求前组装data
+// if (config.headers['Content-Type'] === 'multipart/form-data;') {
+//   config.data.Creator = Creator
+//   return config
+// }
+// if (config.method === 'post' && _ax !== 'jsonapi') {
+//   let data = qs.parse(config.data)
+//   config.data = qs.stringify({
+//     Creator,
+//     ...data
+//   })
+// } else if (config.method === 'get') {
+//   config.params = {
+//     Creator,
+//     ...config.params
+//   }
+// } else if (_ax === 'jsonapi') {
+//   config.headers['Content-Type'] = 'application/json;charset=UTF-8'
+//   if (typeof config.data === 'undefined') config.data = {}
+//   Object.assign(config.data, {
+//     Creator
+//   })
+// }
+// if (Vue.cookie.get('TOKEN')) {
+//   if (window.localStorage.getItem(`${location.host}refreshToken_in`) <= Math.round(new Date().getTime() / 1000)) {
+//     if (!window.isRefreshing) {
+//       window.isRefreshing = true
+//       register.Refresh({
+//         Token: Vue.cookie.get('TOKEN'),
+//         RefreshToken: window.localStorage.getItem(`${location.host}refreshToken`)
+//       }).then(res => {
+//         if (res.ResultType === 200) {
+//           window.isRefreshing = false
+//           console.log('res', res)
+//           let
+//             expiresTime = (res.AppendData.expires_in - 60) / 60, // 比服务器少一分钟
+//             token = res.AppendData.access_token
+//           Vue.cookie.set('TOKEN', token, {
+//             expires: `${expiresTime}m`
+//           });
+//           window.localStorage.setItem(`${location.host}refreshToken`, res.AppendData.refreshToken)
+//           window.localStorage.setItem(`${location.host}refreshToken_in`, res.AppendData.refreshToken_in)
+//         }
+//       }).catch(error => {
+//           window.isRefreshing = false
+//         }
 
-      )
-      return config;
-    } else {
-      return config;
-    }
-  } else {
-    return config;
-  }
+//       )
+//       return config;
+//     } else {
+//       return config;
+//     }
+//   } else {
+//     return config;
+//   }
 
-} else {
-  return config
-}
+// } else {
+//   return config
+// }
 
-}, (error) => {
-return Promise.reject(error)
-})
+// }, (error) => {
+// return Promise.reject(error)
+// })
 
 // 返回状态
 axios.interceptors.response.use((res) => {
 // 大于400 表示token过期或丢失
 if (res.data && res.data.code > 400) {
-  Vue.cookie.delete('TOKEN')
+//   Vue.cookie.delete('TOKEN')
   router.replace({
     path: 'login',
     query: {
@@ -154,7 +154,7 @@ export function fetchPost(url, params, text = '') {
       return new Promise((resolve, reject) => {
         axios.post(url, params)
           .then(response => {
-            console.log(text, response.data)
+            // console.log(text, response.data)
             resolve(response.data)
           }, err => {
             reject(err)
@@ -185,16 +185,6 @@ export function fetchPost(url, params, text = '') {
   }
 
   export default {
-    LoginTenant(params) {
-      return fetchPost('/api/Tenant/LoginTenant', params, '登录')
-    },
-    TenantStatistics(params) {
-      return fetchPost('/api/Tenant/TenantStatistics', params, '首页')
-    },
-    ConfirmLogin(params) {
-      return fetchPost('/api/Tenant/ConfirmLogin', params, '确认登录')
-    },
-   
     /**
      * 工具模块
      */
